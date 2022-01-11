@@ -1,0 +1,31 @@
+on: [push, pull_request]
+
+jobs:
+  print-username:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Setup | Cache
+        uses: Swatinem/rust-cache@v1
+      - name: Install ${{ matrix.rust }} toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust }}
+          target: ${{ matrix.target }}
+          override: true
+        # idk how much of these are needed but better be safe than sorry.
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y -qq pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
+          sudo apt-get install libssl-dev pkg-config libxcb-composite0-dev libx11-dev desktop-file-utils zsync
+      - name: install cargo prod
+        run: cargo install cargo-prod
+      - uses: actions/upload-artifact@v2.2.4
+        with:
+          name: binaries
+          path: target/package
