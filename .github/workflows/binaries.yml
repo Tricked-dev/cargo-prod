@@ -6,17 +6,14 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
-        with:
-          submodules: true
+
       - name: Setup | Cache
         uses: Swatinem/rust-cache@v1
-      - name: Install ${{ matrix.rust }} toolchain
-        uses: actions-rs/toolchain@v1
+
+      - uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
-          toolchain: ${{ matrix.rust }}
-          target: ${{ matrix.target }}
-          override: true
+          toolchain: stable
+
         # idk how much of these are needed but better be safe than sorry.
       - name: Install deps
         run: |
