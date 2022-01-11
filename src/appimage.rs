@@ -117,31 +117,29 @@ pub fn main(args: &Args) -> Result<()> {
             fs_extra::dir::create("libs", true).context("Failed to create libs dir")?;
 
             for line in linkedlibs.lines() {
-                if line.starts_with("/") {
-                    if !std::path::Path::new("libs").join(&line[1..]).exists() {
-                        std::os::unix::fs::symlink(
+                if line.starts_with('/') && !std::path::Path::new("libs").join(&line[1..]).exists() {
+                    std::os::unix::fs::symlink(
+                        line,
+                        std::path::Path::new("libs").join(
+                            std::path::Path::new(line)
+                                .file_name()
+                                .with_context(|| format!("No filename for {}", line))?,
+                        ),
+                    )
+                    .with_context(|| {
+                        format!(
+                            "Error symlinking {} to {}",
                             line,
-                            std::path::Path::new("libs").join(
-                                std::path::Path::new(line)
-                                    .file_name()
-                                    .with_context(|| format!("No filename for {}", line))?,
-                            ),
+                            std::path::Path::new("libs").join(&line[1..]).display()
                         )
-                        .with_context(|| {
-                            format!(
-                                "Error symlinking {} to {}",
-                                line,
-                                std::path::Path::new("libs").join(&line[1..]).display()
-                            )
-                        })?;
-                    }
+                    })?;
                 }
             }
         }
 
         if std::path::Path::new("libs").exists() {
             for i in std::fs::read_dir("libs").context("Could not read libs dir")? {
-                let ref path = i?.path();
+                let path = &i?.path();
                 let link = std::fs::read_link(path)
                     .with_context(|| format!("Error reading link in libs {}", path.display()))?;
 

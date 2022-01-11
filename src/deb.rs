@@ -1,5 +1,5 @@
 use cargo_deb::*;
-use std::env;
+
 use std::path::Path;
 use std::process;
 use std::time;
@@ -182,7 +182,7 @@ fn process(
         println!("{}", generated.display());
     }
 
-    remove_deb_temp_directory(&options);
+    remove_deb_temp_directory(options);
 
     if install {
         install_deb(&generated)?;

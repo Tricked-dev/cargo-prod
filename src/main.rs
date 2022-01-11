@@ -2,7 +2,7 @@ use std::process::Command;
 
 use anyhow::{Context, Result};
 use clap::StructOpt;
-use colored::{ColoredString, Colorize};
+use colored::{Colorize};
 use std::fs;
 
 #[cfg(feature = "xbps")]
