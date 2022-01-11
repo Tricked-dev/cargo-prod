@@ -126,10 +126,6 @@ fn process(
 
     cargo_deb::data::compress_assets(&mut options, listener)?;
 
-    if (options.strip || separate_debug_symbols) && !no_strip {
-        strip_binaries(&mut options, target, listener, separate_debug_symbols)?;
-    }
-
     // Obtain the current time which will be used to stamp the generated files in the archives.
     let system_time = time::SystemTime::now()
         .duration_since(time::UNIX_EPOCH)?
