@@ -7,7 +7,7 @@ use std::fs;
 
 #[cfg(feature = "xbps")]
 use cargo_prod::xbps;
-use cargo_prod::{appimage, aur, deb, p, Args, Cli, Commands};
+use cargo_prod::{appimage, aur, deb, p, Cli, Commands};
 
 fn main() -> Result<()> {
     Command::new("cargo")
