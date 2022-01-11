@@ -1,0 +1,58 @@
+[package]
+name = "cargo-package"
+version = "0.1.0"
+edition = "2021"
+authors = ["Tricked-dev"]
+homepage = "https://tricked.pro/cargo-package"
+license = "GPL-3"
+readme = "README.md"
+repository = "https://github.com/Tricked-dev/cargo-package"
+description = "package your rust application for linux distributions"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cargo-deb = "1.34"
+fs_extra = "1.2.0"
+cargo_toml = "0.10.3"
+anyhow = "1.0.52"
+platforms = "2.0.0"
+rayon = "1.5.1"
+toml = "0.5.8"
+colored = "2.0.0"
+gumdrop = "0.8.0"
+hmac-sha256 = "1.1.1"
+itertools = "0.10.3"
+serde_derive = "1.0.133"
+serde = { version = "1.0.133", features = ["derive"] }
+clap = { version = "3.0.4", features = ["derive"] }
+
+
+[features]
+xbps = []
+
+[package.metadata.appimage]
+
+[package.metadata.deb]
+license-file = ["LICENSE", "4"]
+extended-description = """package your rust application for linux distributions"""
+depends = "$auto"
+section = "utility"
+priority = "optional"
+assets = [
+    [
+        "target/release/cargo-package",
+        "usr/bin/",
+        "755",
+    ],
+    [
+        "LICENSE",
+        "usr/share/doc/cargo-package/LICENSE",
+        "644",
+    ],
+    [
+        "README.md",
+        "usr/share/doc/cargo-package/README.md",
+        "644",
+    ],
+]
