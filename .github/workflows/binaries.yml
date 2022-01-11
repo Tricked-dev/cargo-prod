@@ -27,6 +27,8 @@ jobs:
           sudo mv appimagetool-x86_64.AppImage /bin/appimagetool
       - name: install cargo prod
         run: cargo install cargo-prod
+      - name: run cargo prod
+        run: cargo prod
       - uses: actions/upload-artifact@v2.2.4
         with:
           name: binaries
