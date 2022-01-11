@@ -6,11 +6,24 @@ pub mod xbps;
 
 pub mod error;
 
-use clap::Parser;
+use clap::{AppSettings, Parser, Subcommand};
 use colored::{ColoredString, Colorize};
 
-#[derive(Parser, Debug, Clone)]
-#[clap(about, version, author)]
+#[derive(Parser)]
+#[clap(author, version, about, long_about = None)]
+#[clap(global_setting(AppSettings::PropagateVersion))]
+#[clap(global_setting(AppSettings::UseLongFormatForHelpSubcommand))]
+pub struct Cli {
+    #[clap(subcommand)]
+    pub command: Commands,
+}
+
+#[derive(Subcommand)]
+pub enum Commands {
+    Prod(Args),
+}
+
+#[derive(Parser)]
 pub struct Args {
     #[clap(short, long)]
     pub targets: Option<Vec<String>>,

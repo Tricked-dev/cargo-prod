@@ -5,7 +5,7 @@ package your rust application for linux distributions
 ## Installing
 
 ```sh
-$ cargo install cargo-package
+$ cargo install cargo-prod
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ $ cargo install cargo-package
 you need to have [`appimagetool`](https://appimage.github.io/appimagetool/) installed(to bin) for appimages to work.
 
 ```sh
-$ cargo package
+$ cargo prod
 ```
 
 ## Credits

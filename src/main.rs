@@ -2,12 +2,12 @@ use std::process::Command;
 
 use anyhow::{Context, Result};
 use clap::StructOpt;
-use colored::{Colorize};
+use colored::Colorize;
 use std::fs;
 
 #[cfg(feature = "xbps")]
 use cargo_prod::xbps;
-use cargo_prod::{appimage, aur, deb, p, Args};
+use cargo_prod::{appimage, aur, deb, p, Args, Cli, Commands};
 
 fn main() -> Result<()> {
     Command::new("cargo")
@@ -19,7 +19,8 @@ fn main() -> Result<()> {
 
     fs::create_dir_all("./target/package/")?;
 
-    let args = Args::parse();
+    let matches = Cli::parse();
+    let Commands::Prod(args) = matches.command;
 
     if let Some(ref targets) = args.targets {
         for target in targets {
