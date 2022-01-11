@@ -81,7 +81,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "cargo-package"
+name = "cargo-prod"
 version = "0.1.0"
 dependencies = [
  "anyhow",

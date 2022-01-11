@@ -1,4 +1,4 @@
-# Cargo-package
+# Cargo-prod
 
 package your rust application for linux distributions
 

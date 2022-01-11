@@ -6,8 +6,8 @@ use colored::{ColoredString, Colorize};
 use std::fs;
 
 #[cfg(feature = "xbps")]
-use cargo_package::xbps;
-use cargo_package::{appimage, aur, deb, p, Args};
+use cargo_prod::xbps;
+use cargo_prod::{appimage, aur, deb, p, Args};
 
 fn main() -> Result<()> {
     Command::new("cargo")
