@@ -41,7 +41,7 @@ section = "utility"
 priority = "optional"
 assets = [
     [
-        "target/release/cargo-package",
+        "target/release/cargo-prod",
         "usr/bin/",
         "755",
     ],
